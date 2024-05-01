@@ -24,48 +24,47 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, "src", "index.html"),
     }),
-    new MiniCssExtractPlugin(),
+    new MiniCssExtractPlugin({
+      filename: "[name].css",
+    }),
   ],
   mode: "development",
   module: {
     rules: [
       {
-        test: /\.js$/,
-        loader: "babel-loader",
-        exclude: "/node_modules/",
+        test: /\.html$/i,
+        loader: "html-loader",
       },
       {
-        test: /\.scss$/i,
+        test: /\.(c|sa|sc)ss$/i,
         use: [
-          /* "style-loader", */
-          MiniCssExtractPlugin.loader,
-          { loader: "css-loader", options: { sourceMap: true } },
+          devMode ? "style-loader" : MiniCssExtractPlugin.loader,
+          "css-loader",
           {
             loader: "postcss-loader",
             options: {
-              sourceMap: true,
               postcssOptions: {
-                plugins: [require("postcss-preset-env")],
+                plugins: [
+                  require("postcss-preset-env"),
+                  require("css-mqpacker"),
+                  require("cssnano")({
+                    preset: [
+                      "default",
+                      {
+                        discardComments: {
+                          removeAll: true,
+                        },
+                      },
+                    ],
+                  }),
+                ],
               },
-              /* config: { path: "src/js/postcss.config.js" }, */
             },
           },
-          { loader: "sass-loader", options: { sourceMap: true } },
-        ],
-      },
-      {
-        test: /\.css$/i,
-        use: [
-          MiniCssExtractPlugin.loader,
-          { loader: "css-loader", options: { sourceMap: true } },
           {
-            loader: "postcss-loader",
+            loader: "sass-loader",
             options: {
-              postcssOptions: {
-                plugins: [require("postcss-preset-env")],
-              },
               sourceMap: true,
-              /* config: { path: "src/js/postcss.config.js" }, */
             },
           },
         ],

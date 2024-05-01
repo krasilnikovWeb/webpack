@@ -1,1 +1,0 @@
-{"version":3,"file":"app.css","mappings":";;;AAAA;EACE,aAAa;EACb,yBAAiB;UAAjB,iBAAiB;AACnB;;;;;ACHA;EACE,UAAU","sources":["webpack://webpacktemplate/./src/css/main.css","webpack://webpacktemplate/./src/scss/main.scss"],"sourcesContent":[".wrapper {\r\n  display: flex;\r\n  user-select: none;\r\n}\r\n","h1 {\r\n  color: red;\r\n}\r\n"],"names":[],"sourceRoot":""}
