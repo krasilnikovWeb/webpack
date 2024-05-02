@@ -1,3 +1,4 @@
+import "@babel/polyfill";
 import "./index.html";
 import "./js/common.js";
 import "./css/main.css";
