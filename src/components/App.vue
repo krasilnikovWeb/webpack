@@ -1,6 +1,7 @@
 <template>
   <div class="wrapper">
     <h1>{{ text }}</h1>
+    <h1>Web</h1>
   </div>
 </template>
 
@@ -8,7 +9,10 @@
 export default {
   name: "app",
   data() {
-    return { text: "Webpack" };
+    return { text: null };
+  },
+  created() {
+    this.text = this.$store.getters.getText;
   },
 };
 </script>
