@@ -1,6 +1,7 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const { VueLoaderPlugin } = require("vue-loader");
 
 const mode = process.env.NODE_ENV || "development";
 const devMode = mode === "development";
@@ -21,6 +22,7 @@ module.exports = {
     clean: true,
   },
   plugins: [
+    new VueLoaderPlugin(),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, "src", "index.html"),
     }),
@@ -31,6 +33,15 @@ module.exports = {
   mode: "development",
   module: {
     rules: [
+      {
+        test: /\.vue$/,
+        loader: "vue-loader",
+        options: {
+          loader: {
+            scss: "vue-style-loader!css-loader!sass-loader",
+          },
+        },
+      },
       {
         test: /\.html$/i,
         loader: "html-loader",
