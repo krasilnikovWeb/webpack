@@ -12,4 +12,4 @@
 - Vue 3
 - Vuex
 - Sass
-- Webpack
+- Webpack с подключенными и настроенными модулями
